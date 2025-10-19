@@ -1,0 +1,24 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "helppadmod:care_subject",
+            "materials": {
+                "default": "entity_alphatest"
+            },
+            "textures": {
+                "default": "textures/entity/care_subject"
+            },
+            "geometry": {
+                "default": "geometry.care_subject"
+            },
+            "render_controllers": [
+                "controller.render.default"
+            ],
+            "spawn_egg": {
+                "base_color": "#FFD700",
+                "overlay_color": "#FFFFFF"
+            }
+        }
+    }
+} 
