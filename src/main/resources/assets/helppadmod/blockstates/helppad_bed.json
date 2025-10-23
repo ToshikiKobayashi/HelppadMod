@@ -1,0 +1,13 @@
+{
+    "variants": {
+      "part=head,facing=north": { "model": "helppadmod:block/helppad_bed_head_north" },
+      "part=head,facing=south": { "model": "helppadmod:block/helppad_bed_head_south" },
+      "part=head,facing=west":  { "model": "helppadmod:block/helppad_bed_head_west" },
+      "part=head,facing=east":  { "model": "helppadmod:block/helppad_bed_head_east" },
+  
+      "part=foot,facing=north": { "model": "helppadmod:block/helppad_bed_foot_north" },
+      "part=foot,facing=south": { "model": "helppadmod:block/helppad_bed_foot_south" },
+      "part=foot,facing=west":  { "model": "helppadmod:block/helppad_bed_foot_west" },
+      "part=foot,facing=east":  { "model": "helppadmod:block/helppad_bed_foot_east" }
+    }
+  }

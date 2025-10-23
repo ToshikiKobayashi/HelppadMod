@@ -1,0 +1,23 @@
+{
+	"parent": "block/block",
+	"textures": {
+	  "top": "helppadmod:block/helppad_bed_foot_top",
+	  "west": "helppadmod:block/helppad_bed_foot_west",
+	  "east": "helppadmod:block/helppad_bed_foot_east",
+	  "south": "helppadmod:block/helppad_bed_foot_south"
+	},
+	"elements": [
+	  {
+		"from": [0, 0, 0],
+		"to": [16, 9, 16],
+		"faces": {
+		  "up":    { "texture": "#top" },
+		  "down":  { "texture": "#top" },
+		  "north": { "texture": "#south" },
+		  "south": { "texture": "#south" },
+		  "west":  { "texture": "#west" },
+		  "east":  { "texture": "#east" }
+		}
+	  }
+	]
+  }

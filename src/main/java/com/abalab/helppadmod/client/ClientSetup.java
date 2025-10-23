@@ -22,4 +22,4 @@ public class ClientSetup {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CareSubjectModel.LAYER_LOCATION, () -> CareSubjectModel.createBodyLayer());
      }
-} 
+}

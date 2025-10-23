@@ -1,20 +1,19 @@
 package com.abalab.helppadmod;
 
+import com.abalab.helppadmod.blockentity.HelppadBedBlockEntity;
+
+import com.abalab.helppadmod.block.HelppadBedBlock;
 import com.abalab.helppadmod.entity.CareSubjectEntity;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -27,6 +26,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Set;
+
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -45,12 +47,30 @@ public final class HelppadMod {
                 .sized(0.6f, 1.8f)
                 .build(ENTITIES.key("care_subject")));
 
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);  
+
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HelppadMod.MODID);
+    public static final RegistryObject<Block> HELPPAD_BED_BLOCK = BLOCKS.register("helppad_bed",
+            () -> new HelppadBedBlock(BlockBehaviour.Properties.of().strength(3.0f, 3.0f).requiresCorrectToolForDrops().setId(BLOCKS.key("helppad_bed"))));
+    public static final RegistryObject<Item> HELPPAD_BED_ITEM = ITEMS.register("helppad_bed",
+            () -> new BlockItem(HELPPAD_BED_BLOCK.get(), new Item.Properties().setId(ITEMS.key("helppad_bed"))));
+
+
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, HelppadMod.MODID);
+    public static final RegistryObject<BlockEntityType> HELPPAD_BED_BLOCK_ENTITY_TYPE = BLOCK_ENTITIES.register("helppad_bed",
+     () -> new BlockEntityType<>((pos, state) -> new HelppadBedBlockEntity(pos, state), Set.of(HELPPAD_BED_BLOCK.get())));
+
+
     public HelppadMod(FMLJavaModLoadingContext context) {
         var modBusGroup = context.getModBusGroup();
 
         // Register the commonSetup method for modloading
         FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
+        ITEMS.register(modBusGroup);
         ENTITIES.register(modBusGroup);
+        BLOCKS.register(modBusGroup);
+        BLOCK_ENTITIES.register(modBusGroup);
 
         // Register the item to a creative tab
         BuildCreativeModeTabContentsEvent.getBus(modBusGroup).addListener(HelppadMod::addCreative);
