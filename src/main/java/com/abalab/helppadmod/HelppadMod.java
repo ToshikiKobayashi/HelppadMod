@@ -4,6 +4,9 @@ import com.abalab.helppadmod.blockentity.HelppadBedBlockEntity;
 
 import com.abalab.helppadmod.block.HelppadBedBlock;
 import com.abalab.helppadmod.entity.CareSubjectEntity;
+import com.abalab.helppadmod.event.ToiletCapabilityAttacher;
+import com.abalab.helppadmod.event.VillagerToiletHandler;
+
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +18,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.EventBusMigrationHelper;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
@@ -74,6 +80,7 @@ public final class HelppadMod {
 
         // Register the item to a creative tab
         BuildCreativeModeTabContentsEvent.getBus(modBusGroup).addListener(HelppadMod::addCreative);
+
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

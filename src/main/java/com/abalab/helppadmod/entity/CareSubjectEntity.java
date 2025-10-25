@@ -28,6 +28,17 @@ public class CareSubjectEntity  extends Villager {
                 discomfortLevel = Mth.clamp(discomfortLevel + 1, 0, 100);
             }
 
+            // 寝ている場合は動かないようにする
+            if (this.isSleeping()) {
+                // ベッド上に正確に固定
+                BlockPos bedPos = this.blockPosition(); // 寝ているベッドの位置
+                this.setPos(bedPos.getX() + 0.5, bedPos.getY() + 0.6875, bedPos.getZ() + 0.5); 
+                this.setDeltaMovement(0, 0, 0); // 移動速度リセット
+                this.yRotO = 0; // 必要に応じて向きも固定
+                this.xRotO = 0;
+                return; // 寝ている間は他の AI 処理をスキップ
+            }
+
             // 常に寝ようとする
             trySleepAnytime();
         }
